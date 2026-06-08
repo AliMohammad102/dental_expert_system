@@ -1,0 +1,5 @@
+PROJECT_SPECIFICATION3.md
+*.pyc
+__pycache__/
+dental_env/
+.vscode/
