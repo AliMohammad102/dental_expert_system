@@ -81,38 +81,50 @@ def render_questions(symptom_questions):
 
     symptom_groups = [
         (
-            "Pain Symptoms",
+            "Pain & Sensitivity Symptoms",
             [
                 "tooth_pain",
                 "severe_throbbing_pain",
                 "cold_sensitivity",
                 "hot_sensitivity",
+                "sweet_sensitivity",
                 "pain_while_chewing",
-                "pain_after_stimulus",
+                "lingering_pain",
                 "night_pain",
+                "pain_on_tapping",
             ],
         ),
         (
-            "Gum Symptoms",
+            "Gum & Periodontal Symptoms",
             [
                 "gum_bleeding",
                 "gum_redness",
-                "gum_face_swelling",
+                "gum_tenderness",
                 "receding_gums",
+                "gum_pockets",
+                "loose_teeth",
+                "plaque_tartar",
             ],
         ),
         (
-            "Infection Symptoms",
+            "Infection & Swelling Symptoms",
             [
+                "gum_face_swelling",
                 "bad_breath",
                 "pus_bad_taste",
+                "fever",
+                "difficulty_opening_mouth",
+                "swollen_lymph_nodes",
             ],
         ),
         (
-            "Bruxism Symptoms",
+            "Bruxism & Jaw Symptoms",
             [
                 "grinding_sleep",
                 "jaw_pain_fatigue",
+                "morning_headache",
+                "earache",
+                "worn_teeth",
             ],
         ),
         (
