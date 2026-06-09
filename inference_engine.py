@@ -1,9 +1,5 @@
-"""Simple inference engine for the dental expert system."""
-
 from typing import Dict, List, Optional
-
 import knowledge_base
-
 
 def _to_diagnostic_fact(disease: str) -> str:
     mapping = {
@@ -55,12 +51,9 @@ def diagnose(working_memory: Dict[str, bool]) -> Dict:
         result = evaluate_rule(rule, working_memory)
         if result["full_match"]:
             disease = result["disease"]
-
-            # Use set to avoid duplicate rule IDs
             if disease not in fired_rules_by_disease:
                 fired_rules_by_disease[disease] = set()
             fired_rules_by_disease[disease].add(result["rule_id"])
-
             matched_symptoms_by_disease.setdefault(disease, []).extend(result["matched_symptoms"])
 
     if not fired_rules_by_disease:
@@ -79,14 +72,11 @@ def diagnose(working_memory: Dict[str, bool]) -> Dict:
     best_coverage = 0.0
     best_matched_symptom_count = 0
 
-    # Calculate coverage (fired_rules / total_rules_for_disease) for conflict resolution
     for disease, rules in fired_rules_by_disease.items():
         disease_rule_count = sum(1 for rule in knowledge_base.RULES if rule["disease"] == disease)
         rule_count = len(rules)
         coverage = rule_count / disease_rule_count if disease_rule_count else 0
         symptom_count = len(matched_symptoms_by_disease.get(disease, []))
-
-        # Priority: coverage > symptom count
         if coverage > best_coverage or (
             coverage == best_coverage and symptom_count > best_matched_symptom_count
         ):
@@ -100,8 +90,6 @@ def diagnose(working_memory: Dict[str, bool]) -> Dict:
 
     disease_rule_count = sum(1 for rule in knowledge_base.RULES if rule["disease"] == best_disease)
     best_rule_count = len(fired_rules_by_disease[best_disease])
-
-    # Calculate real score based on coverage
     score = best_coverage
 
     if score >= 0.8:
@@ -119,6 +107,6 @@ def diagnose(working_memory: Dict[str, bool]) -> Dict:
         "matched_rule": fired_rule_ids_for_disease[0] if fired_rule_ids_for_disease else None,
         "fired_rules": fired_rule_ids_for_disease,
         "matched_symptoms": unique_matched_symptoms,
-        "diagnostic_facts": [_to_diagnostic_fact(best_disease)],
+        "diagnostic_facts": [_to_diagnostic_fact(best_disease)], # type: ignore
         "positive_facts": positive_facts,
     }

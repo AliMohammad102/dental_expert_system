@@ -1,5 +1,3 @@
-"""Dental expert system knowledge base."""
-
 SYMPTOM_QUESTIONS = [
     ("tooth_pain", "Do you feel pain in one of your teeth?"),
     ("severe_throbbing_pain", "Is the pain severe, throbbing, or spontaneous (occurs without any trigger)?"),
